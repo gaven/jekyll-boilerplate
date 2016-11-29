@@ -13,23 +13,3 @@ const watch = () => {
 }
 
 gulp.task('default', ['browser-sync'], watch);
-
-
-
-gulp.task('deploy', ['htmlmin'], () => {
-  return gulp.src('./_site/**/*').pipe($.ghPages({branch: 'prod'}));
-});
-
-gulp.task('htmlmin', ['build:prod'], () => {
-  return gulp.src('./_site/**/*.html')
-    .pipe($.htmlmin( {collapseWhitespace: true}))
-    .pipe(gulp.dest('./_site/'))
-    .pipe(reload({stream: true}));
-});
-
-gulp.task('build:prod', ['js', 'sass', 'imagemin'], (done) => {
-  let productionEnv = process.env;
-      productionEnv.JEKYLL_ENV = 'production';
-
-  return cp.spawn('jekyll', ['build'], {stdio: 'inherit' , env: productionEnv}).on('close', done);
-});
