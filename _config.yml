@@ -15,7 +15,7 @@ exclude:
   - gulpfile.*
   - package.json
   - README.md
-  - makefile
+  - gulp
 keep_files:
   - css/main.css
   - css/main.min.css
