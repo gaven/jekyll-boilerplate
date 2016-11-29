@@ -1,0 +1,23 @@
+# Site settings
+title: Jekyll Boilerplate
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site
+twitter_username: vannio
+github_username: vannio
+linkedin_username: vannio
+
+# Build settings
+markdown: kramdown
+exclude:
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+  - gulpfile.*
+  - package.json
+  - README.md
+  - makefile
+keep_files:
+  - css/main.css
+  - css/main.min.css
+  - scripts/main.js
+  - scripts/main.min.js

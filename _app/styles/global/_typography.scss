@@ -1,0 +1,13 @@
+body {
+  color: map-get($colors, 'black');
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-family: $font-sans-serif;
+    font-style: normal;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+  }
+}

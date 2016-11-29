@@ -1,0 +1,9 @@
+@mixin retina-image($image) {
+  $idx: find-last-idx($image, ".");
+
+  background-image: url($image);
+
+  @include media("retina2x") {
+    background-image: url(str-insert($image, "@2x", $idx));
+  }
+}

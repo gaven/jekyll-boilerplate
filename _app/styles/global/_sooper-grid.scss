@@ -1,0 +1,104 @@
+@function extend-map($map, $defaults) {
+  @if (type-of($defaults) == 'map' && type-of($map) == 'map' ) {
+    $_final: $map;
+
+    @each $_key, $_value in $defaults {
+      @if (not map-has-key($map, $_key)) {
+        $_final: map-merge($_final, ($_key : $_value));
+      }
+    }
+
+    @return $_final;
+  } @else {
+    @error 'You must pass maps to the extend functions';
+  }
+}
+
+$grid: () !default;
+$grid-settings: extend-map($grid, (
+  'breakpoint': 'on',
+  'columns': 12,
+  'gutters': 5px,
+  'max-width': 75rem
+));
+
+@mixin container($spacing, $wrap: true, $settings: $grid-settings) {
+  display: flex;
+  @if $wrap == true {
+    flex-wrap: wrap;
+  }
+  justify-content: $spacing;
+  margin: 0 auto;
+  max-width: map-get($settings, 'max-width');
+  width: container-width($grid-settings);
+}
+
+@function column-width($settings: $grid-settings) {
+  $_columns: map-get($settings, 'columns');
+  $_column-width: (100/$_columns) * 1%;
+
+  @return $_column-width;
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+@function container-max-width($settings: $grid-settings) {
+  $_max-width: map-get($settings, 'max-width');
+  $_max-width-unit: unit($_max-width);
+
+  @if $_max-width-unit == 'rem' or 'em' {
+    @return strip-unit($_max-width) * 16;
+  } @else if $_max-width-unit = 'px' {
+    @return strip-unit($_max-width);
+  } @else {
+    @error 'Please use rem, em, or px values.';
+  }
+}
+
+@function convert-unit($settings: $grid-settings) {
+  $_gutters: map-get($settings, 'gutters');
+  $_gutters-unit: unit($_gutters);
+
+  @if $_gutters-unit == 'px' {
+    @return (strip-unit(strip-unit($_gutters) * column-width()) / container-max-width()) * 1%;
+  } @else if $_gutters-unit == 'rem' or 'em' {
+    @return (strip-unit((strip-unit($_gutters) * 16) * column-width()) / container-max-width()) * 1%;
+  }
+}
+
+@function total-column-width() {
+  @return column-width() - convert-unit();
+}
+
+@function container-width($settings: $grid-settings) {
+  $_columns: map-get($settings, 'columns');
+  $_total-width: column-width() * $_columns;
+
+  @return $_total-width;
+}
+
+@function break($settings: $grid-settings) {
+  $_breakpoint: map-get($settings, 'breakpoint');
+  $_break-width: null;
+
+  @if $_breakpoint == 'on' {
+    $_break-width: '>=';
+  } @else if $_breakpoint == 'before' {
+    $_break-width: '<';
+  } @else if $_breakpoint == 'after' {
+    $_break-width: '>';
+  }
+
+  @return $_break-width;
+}
+
+// Functions for float based grid
+
+@function column-width-inside($settings: $grid-settings) {
+
+}

@@ -1,0 +1,21 @@
+$font-sans-serif: 'canada-type-gibson', sans-serif;
+$font-fancy: 'leitura-news', serif;
+
+$colors: (
+  'black': #32312f,
+  'pink': #fe61a6
+);
+
+$breakpoints: (
+  'phone': 320px,
+  'tablet': 768px,
+  'desktop': 1024px,
+  'large': 1200px
+) !default;
+
+$grid: (
+  'breakpoint': 'after',
+  'columns': 12,
+  'gutters': 2rem,
+  'max-width': 75rem
+) !default;
