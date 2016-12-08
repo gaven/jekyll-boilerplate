@@ -1,6 +1,6 @@
 .container {
   padding: 0 1rem;
-  @include container(space-between);
+  @include flex-container(space-between);
 
   @include media('#{break()}tablet') {
     padding: 0 2.5rem;

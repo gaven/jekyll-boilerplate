@@ -2,9 +2,8 @@
 title: Jekyll Boilerplate
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site
-twitter_username: vannio
-github_username: vannio
-linkedin_username: vannio
+twitter_username: gavenheim
+github_username: gavenheim
 
 # Build settings
 markdown: kramdown

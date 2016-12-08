@@ -22,16 +22,39 @@ $grid-settings: extend-map($grid, (
   'max-width': 75rem
 ));
 
-@mixin container($spacing, $wrap: true, $settings: $grid-settings) {
+@mixin flex-container($spacing, $wrap: true, $settings: $grid-settings) {
   display: flex;
+
   @if $wrap == true {
     flex-wrap: wrap;
   }
+
   justify-content: $spacing;
   margin: 0 auto;
   max-width: map-get($settings, 'max-width');
   width: container-width($grid-settings);
 }
+
+@mixin float-container($spacing, $settings: $grid-settings) {
+  display: block;
+  margin: 0 auto;
+  max-width: map-get($settings, 'max-width');
+  width: container-width($grid-settings);
+
+  @if $spacing == 'margin' {
+    & > *:last-child {
+      float: right;
+    }
+  }
+
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+
 
 @function column-width($settings: $grid-settings) {
   $_columns: map-get($settings, 'columns');
