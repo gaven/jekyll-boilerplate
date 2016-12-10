@@ -38,10 +38,34 @@ $grid-settings: extend-map($grid, (
 }
 
 @mixin float-container($settings: $grid-settings) {
+  $_gutter-position: map-get($settings, 'gutter-position');
   margin: 0 auto;
   max-width: map-get($settings, 'max-width');
   width: container-width($grid-settings);
 
+  @if $_gutter-position == 'inside' {
+    & > * {
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  } @else if $_gutter-position == 'outside' {
+    & > * {
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+        float: right;
+      }
+    }
+  }
+  
   &::after {
     clear: both;
     content: '';
@@ -115,20 +139,26 @@ $grid-settings: extend-map($grid, (
 
 // Functions for float based grid
 
-@function gutters() {
+@function gutters($settings: $grid-settings) {
   $_gutter-width: convert-unit();
-  @return $_gutter-width;
+  $_columns: map-get($settings, 'columns');
+
+  @return ($_gutter-width * $_columns) / 2;
 }
 
 @mixin float-column($columns, $settings: $grid-settings) {
   $_gutter-position: map-get($settings, 'gutter-position');
-  width: column-width() * $columns;
   float: left;
 
   @if $_gutter-position == 'inside' {
+    width: column-width() * $columns;
     padding-left: gutters();
     padding-right: gutters();
-  } 
+  } @else if $_gutter-position = 'outside' {
+    width: (column-width() * $columns) - gutters();
+    margin-left: gutters();
+    margin-right: gutters();
+  }
 }
 
 @function float-offset($columns) {
