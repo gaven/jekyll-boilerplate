@@ -1,0 +1,59 @@
+@if map-get($grid, 'type') == 'float' {
+  .container {
+    padding: 1rem;
+    @include float-container();
+
+    @include media('#{break()}tablet') {
+      padding: 0 2.5rem;
+    }
+  }
+
+  @for $i from 1 through map-get($grid, 'columns') {
+    @if $i == 12 {
+      .col-sm--#{$i} {
+        width: float-offset($i);
+      }
+    } @else {
+      .col-sm--#{$i} {
+        @include float-column($i);
+      }
+      .col-sm--offset-#{$i} {
+        margin-left: float-offset($i);
+      }
+    }
+  }
+
+  @for $i from 1 through map-get($grid, 'columns') {
+    @include media('#{break()}tablet') {
+      @if $i == 12 {
+        .col-md--#{$i} {
+          width: float-offset($i);
+        }
+      } @else {
+        .col-md--#{$i} {
+          @include float-column($i)
+        }
+        .col-md--offset-#{$i} {
+          margin-left: float-offset($i)
+        }
+      }
+    }
+  }
+
+  @for $i from 1 through map-get($grid, 'columns') {
+    @include media('#{break()}desktop') {
+      @if $i == 12 {
+        .col-lg--#{$i} {
+          width: float-offset($i);
+        }
+      } @else {
+        .col-lg--#{$i} {
+          @include float-column($i);
+        }
+        .col-lg--offset-#{$i} {
+          margin-left: float-offset($i);
+        }
+      }
+    }
+  }
+}
