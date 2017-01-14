@@ -1,5 +1,9 @@
+import cp from 'child_process';
+import browsersync from 'browser-sync';
 import gulp from 'gulp';
 import loadPlugins from 'gulp-load-plugins';
+
+const reload = browsersync.reload;
 const $ = loadPlugins();
 
 const minifyHTML = () => {
@@ -7,15 +11,35 @@ const minifyHTML = () => {
     .pipe($.htmlmin({
       collapseWhitespace: true
     }))
-    .pipe(gup.dest('./_site/'))
+    .pipe(gulp.dest('./_site/'))
     .pipe(reload({stream: true}));
 };
 
-gulp.task('minifyHtml', ['buildProduction'], minifyHTML);
+const minifyCSS = () => {
+  return gulp.src('./css/styles.css')
+  .pipe($.cssnano())
+  .pipe($.rename({extname: '.min.css'}))
+  .pipe(gulp.dest('./css'));
+};
 
-const buildProduction = (done) => {
+const minifyJS = () => {
+  return gulp.src('./scripts/app.js')
+  .pipe($.uglify({onError: browsersync.notify}))
+  .pipe($.rename({extname: '.min.js'}))
+  .pipe(gulp.dest('./scripts'));
+};
+
+const minifyAssets = () => {
+  minifyHTML();
+  minifyCSS();
+  minifyJS();
+};
+
+gulp.task('build:minify', minifyAssets);
+
+const jekyllProduction = (done) => {
   const productionEnv = process.env;
-    productionEnv.JEKYLL_ENV = 'production';
+  productionEnv.JEKYLL_ENV = 'production';
 
   return cp.spawn('jekyll', ['build'], {
     stdio: 'inherit',
@@ -24,13 +48,4 @@ const buildProduction = (done) => {
   .on('close', done);
 };
 
-gulp.task('buildProduction', ['build:scripts', 'build:styles', 'build:images'], buildProduction);
-
-const deploy = () => {
-  return gulp.src('./_site/**/*')
-    .pipe($.ghPages({
-      branch: 'prod'
-    }));
-};
-
-gulp.task('deploy', ['minifyHTML'], deploy);
+gulp.task('build:production', ['build:minify'], jekyllProduction);
