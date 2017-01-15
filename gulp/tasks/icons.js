@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import browsersync from 'browser-sync';
 import loadPlugins from 'gulp-load-plugins';
+import path from 'path';
 
 const $ = loadPlugins();
 
@@ -24,10 +25,10 @@ const icons = () => {
         }]
       };
     }))
-    .on('error', browsersync.notify)
+    .on('error', $.util.log)
     .pipe($.svgstore())
     .pipe($.rename('svg-defs.html'))
-    .pipe(gulp.dest('_includes'));
+    .pipe(gulp.dest('./_includes'));
 };
 
 gulp.task('build:svgs', icons);

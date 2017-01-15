@@ -24,7 +24,7 @@ const minifyCSS = () => {
 
 const minifyJS = () => {
   return gulp.src('./scripts/app.js')
-  .pipe($.uglify({onError: browsersync.notify}))
+  .pipe($.uglify({onError: $.util.log}))
   .pipe($.rename({extname: '.min.js'}))
   .pipe(gulp.dest('./scripts'));
 };

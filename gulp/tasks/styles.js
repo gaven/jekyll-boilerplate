@@ -16,7 +16,7 @@ const styles = () => {
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: ['sass'],
-      onError: browsersync.notify
+      onError: $util.log
     }))
     .pipe($.autoprefixer(supported))
     .pipe(group())
