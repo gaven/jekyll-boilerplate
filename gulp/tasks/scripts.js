@@ -20,10 +20,7 @@ const scripts = () => {
     }))
     .pipe($.rename('app.js'))
     .pipe(gulp.dest('./scripts'))
-    .pipe(reload({stream: true}))
-    .pipe($.uglify({onError: browsersync.notify}))
-    .pipe($.rename({extname: '.min.js'}))
-    .pipe(gulp.dest('./scripts'));
+    .pipe(reload({stream: true}));
 };
 
 gulp.task('build:scripts', scripts);

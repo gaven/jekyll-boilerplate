@@ -5,7 +5,7 @@ import browsersync from 'browser-sync';
 const reload = browsersync.reload;
 
 const jekyll = (done) => {
-    return cp.spawn('jekyll', ['build', '--drafts'], {
+    return cp.spawn('jekyll', ['build'], {
       stdio: 'inherit'
     })
     .on('close', done);

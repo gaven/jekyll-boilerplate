@@ -46,7 +46,7 @@
 
 	'use strict';
 
-	console.log('Here is some stuff');
+	console.log('Hey there');
 
 /***/ }
 /******/ ]);

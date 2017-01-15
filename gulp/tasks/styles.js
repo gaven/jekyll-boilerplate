@@ -23,13 +23,7 @@ const styles = () => {
     .pipe($.rename({extname: '.css'}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('./css'))
-    .pipe(reload({stream: true}))
-    .pipe($.cleanCss({
-      keepBreaks: false,
-      keepSpecialComments:true
-    }))
-    .pipe($.rename({extname: '.min.css'}))
-    .pipe(gulp.dest('./css'));
+    .pipe(reload({stream: true}));
 };
 
 gulp.task('build:styles', styles);

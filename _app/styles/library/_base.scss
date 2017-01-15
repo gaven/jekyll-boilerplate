@@ -14,8 +14,10 @@ $breakpoints: (
 ) !default;
 
 $grid: (
+  'type': 'float',
   'breakpoint': 'after',
   'columns': 12,
-  'gutters': 2rem,
+  'gutter-size': 16px,
+  'gutter-position': 'inside',
   'max-width': 75rem
 ) !default;
