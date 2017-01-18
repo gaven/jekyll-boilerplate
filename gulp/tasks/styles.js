@@ -3,7 +3,6 @@ import browsersync from 'browser-sync';
 import loadPlugins from 'gulp-load-plugins';
 import group from 'gulp-group-css-media-queries';
 
-const reload = browsersync.reload;
 const $ = loadPlugins();
 const supported = [
   '> 1%',
@@ -16,14 +15,13 @@ const styles = () => {
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       includePaths: ['sass'],
-      onError: $util.log
+      onError: $.util.log
     }))
     .pipe($.autoprefixer(supported))
     .pipe(group())
     .pipe($.rename({extname: '.css'}))
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('./css'))
-    .pipe(reload({stream: true}));
+    .pipe(gulp.dest('./css'));
 };
 
 gulp.task('build:styles', styles);
