@@ -3,7 +3,7 @@
 import gulp from 'gulp';
 import requireDir from 'require-dir';
 
-requireDir('./gulp/tasks', { recurse: true });
+requireDir('./tasks', { recurse: true });
 
 const watch = () => {
   gulp.watch(['./_app/styles/**/*.scss'], ['build:styles']);
