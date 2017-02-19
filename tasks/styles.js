@@ -13,9 +13,8 @@ const styles = () => {
   return gulp.src('_app/styles/styles.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      includePaths: ['sass'],
-      onError: $.util.log
-    }))
+      outputStyle: 'expanded'
+    }).on('error', $.sass.logError))
     .pipe($.autoprefixer(supported))
     .pipe(group())
     .pipe($.rename({extname: '.css'}))

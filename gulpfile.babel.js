@@ -13,6 +13,4 @@ const watch = () => {
   gulp.watch(['./css/*.css', './scripts/*.js'], ['build:reload']);
 };
 
-gulp.task('watch', ['serve'], watch);
-
-gulp.task('default', ['watch']);
+gulp.task('default', ['serve'], watch);
