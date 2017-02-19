@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import browsersync from 'browser-sync';
 import loadPlugins from 'gulp-load-plugins';
 import group from 'gulp-group-css-media-queries';
 

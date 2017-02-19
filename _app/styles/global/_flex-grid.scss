@@ -11,7 +11,8 @@
   @for $i from 1 through map-get($grid, 'columns') {
     @if $i == 12 {
       .col-sm--#{$i} {
-        flex: 0 0 (column-width() * $i);
+        flex-basis: (column-width() * $i);
+        max-width: (column-width() * $i);
       }
 
       .col-sm--offset--#{$i} {
@@ -19,7 +20,8 @@
       }
     } @else {
       .col-sm--#{$i} {
-        flex: 0 0 (flex-column-width() * $i);
+        flex-basis: (flex-column-width() * $i);
+        max-width: (flex-column-width() * $i);
       }
       .col-sm--offset-#{$i} {
         margin-left: (flex-column-width() * $i);
@@ -31,14 +33,16 @@
     @include media('#{break()}tablet') {
       @if $i == 12 {
         .col-md--#{$i} {
-          flex: 0 0 (column-width() * $i);
+          flex-basis: (column-width() * $i);
+          max-width: (column-width() * $i);
         }
         .col-md--offset--#{$i} {
           margin-left: (column-width() * $i);
         }
       } @else {
         .col-md--#{$i} {
-          flex: 0 0 (flex-column-width() * $i);
+          flex-basis: (flex-column-width() * $i);
+          max-width: (flex-column-width() * $i);
         }
         .col-md--offset-#{$i} {
           margin-left: (flex-column-width() * $i);
@@ -51,14 +55,16 @@
     @include media('#{break()}desktop') {
       @if $i == 12 {
         .col-lg--#{$i} {
-          flex: 0 0 (column-width() * $i);
+          flex-basis: (column-width() * $i);
+          max-width: (column-width() * $i);
         }
         .col-lg--offset--#{$i} {
           margin-left: (column-width() * $i);
         }
       } @else {
         .col-lg--#{$i} {
-          flex: 0 0 (flex-column-width() * $i);
+          flex-basis: (flex-column-width() * $i);
+          max-width: (flex-column-width() * $i);
         }
         .col-lg--offset-#{$i} {
           margin-left: (flex-column-width() * $i);
@@ -67,4 +73,3 @@
     }
   }
 }
-

@@ -14,7 +14,7 @@ $breakpoints: (
 ) !default;
 
 $grid: (
-  'type': 'float',
+  'type': 'flex',
   'breakpoint': 'after',
   'columns': 12,
   'gutter-size': 16px,
