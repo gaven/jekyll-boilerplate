@@ -17,6 +17,9 @@ gulp.task('minifyHTML', minifyHTML);
 
 const minifyCSS = () => {
   return gulp.src('./css/styles.css')
+  .pipe($.uncss({
+    html: ['./_site/**/*.html']
+  }))
   .pipe($.cssnano())
   .pipe($.rename({extname: '.min.css'}))
   .pipe(gulp.dest('./css'));
