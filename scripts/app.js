@@ -46,7 +46,7 @@
 
 	'use strict';
 
-	console.log('Hey tiger!');
+	console.log('Hey tigers!');
 
 /***/ }
 /******/ ]);

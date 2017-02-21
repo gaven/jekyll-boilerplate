@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import browsersync from 'browser-sync';
 import loadPlugins from 'gulp-load-plugins';
 import group from 'gulp-group-css-media-queries';
 
@@ -14,9 +13,8 @@ const styles = () => {
   return gulp.src('_app/styles/styles.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      includePaths: ['sass'],
-      onError: $.util.log
-    }))
+      outputStyle: 'expanded'
+    }).on('error', $.sass.logError))
     .pipe($.autoprefixer(supported))
     .pipe(group())
     .pipe($.rename({extname: '.css'}))

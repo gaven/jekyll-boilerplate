@@ -3,16 +3,16 @@
 @import
   'library/base',
   'library/include-media',
-  'global/utils',
   'library/mixins',
   'library/functions';
 
 @import
   'global/sooper-grid',
-  'global/grid-flex',
-  'global/grid-float',
+  'global/flex-grid',
+  'global/float-grid',
   'global/layout',
-  'global/typography';
+  'global/typography',
+  'global/utils';
 
 @import
   'components/button';

@@ -1,3 +1,29 @@
 .text-center {
   text-align: center !important;
 }
+
+.device-only {
+  @include media('#{break()}tablet') {
+    display: none;
+  }
+}
+
+.tablet-only {
+  display: none;
+
+  @include media('#{break()}tablet') {
+    display: block;
+  }
+
+  @include media('#{break()}desktop') {
+    display: none;
+  }
+}
+
+.desktop-only {
+  display: none;
+
+  @include media('#{break()}tablet') {
+    display: block;
+  }
+}

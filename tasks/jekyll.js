@@ -1,14 +1,19 @@
-import gulp from 'gulp';
-import cp from 'child_process';
 import browsersync from 'browser-sync';
+import cp from 'child_process';
+import gulp from 'gulp';
+import loadPlugins from 'gulp-load-plugins';
 
+const $ = loadPlugins();
 const reload = browsersync.reload;
 
-const jekyll = (done) => {
-    return cp.spawn('jekyll', ['build'], {
-      stdio: 'inherit'
-    })
-    .on('close', done);
+const jekyll = () => {
+  const command = 'jekyll build --config _config.yml';
+
+  cp.exec(command, (err) => {
+    if (err) {
+      $.util.log(err);
+    }
+  });
 };
 
 gulp.task('build:jekyll', jekyll);
